@@ -1,0 +1,4 @@
+*.o
+philosophers
+.vscode
+*.dSYM
