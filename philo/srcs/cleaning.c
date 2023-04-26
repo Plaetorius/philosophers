@@ -45,3 +45,27 @@ void	free_philos(t_philo *philo)
 	}
 	philo = NULL;
 }
+
+int		free_mutexes(t_vars *vars)
+{
+	int		i;
+	int		ret_value;
+	t_philo	*philo;
+
+	ret_value = false;
+	ret_value |= pthread_mutex_destroy(&vars->message);
+	ret_value |= pthread_mutex_destroy(&vars->synchro);
+	ret_value |= pthread_mutex_destroy(&vars->mutex_end);
+	ret_value |= pthread_mutex_destroy(&vars->mutex_ate_enough);
+	i = 0;
+	philo = vars->philos;
+	while (i < vars->nb_philo)
+	{
+		ret_value |= pthread_mutex_destroy(&philo->mutex_last_eat);
+		ret_value |= pthread_mutex_destroy(&philo->fork);
+		ret_value |= pthread_mutex_destroy(&philo->mutex_forks);
+		philo = philo->next;
+		++i;
+	}
+	return (ret_value);
+}

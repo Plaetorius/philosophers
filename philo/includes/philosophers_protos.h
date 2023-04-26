@@ -24,14 +24,12 @@ bool		get_time(t_ul *val);
 bool		memory_cleaning(t_vars *vars);
 void		free_philos(t_philo *philo);
 int			join_philo_threads(t_vars *vars, int failed_nb);
-bool		clean_forks(t_vars *vars, int fork_failed);
 
 /* THREADS */
 void		*simulation(void *arg);
-void		*monitor(void *arg);
+void		monitor(t_philo *philo, t_vars *vars);
 
 /* Actions */
-bool		bedtime(t_philo *philo, t_vars *vars);
-bool		eat(t_philo *philo, t_vars *vars);
-
+void		eat(t_philo *philo, t_vars *vars);
+bool		take_forks(t_philo *philo, t_philo *n_philo, t_vars *vars);
 #endif

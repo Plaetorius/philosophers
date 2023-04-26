@@ -44,8 +44,10 @@ typedef struct s_vars
 	t_ul				start_time;
 	bool				end;
 	pthread_mutex_t		mutex_end;
-	pthread_mutex_t		mutex_eat;
+	int					ate_enough;
+	pthread_mutex_t		mutex_ate_enough;
 	pthread_mutex_t		synchro;
+	int					synched;
 }						t_vars;
 
 /*
@@ -53,7 +55,7 @@ typedef struct s_vars
 	TTE: Time To Eat
 	TTS: Time To Sleep
 	TTF: Times To Finish
-	DP: Death Pronounced
+
 	Start Time must be initialized when all threads are created
 */
 
