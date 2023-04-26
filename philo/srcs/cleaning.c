@@ -1,6 +1,6 @@
 #include "philosophers.h"
 
-int	join_philo_threads(t_vars *vars)
+int	join_philo_threads(t_vars *vars, int failed_nb)
 {
 	int		i;
 	int		failed;
@@ -9,7 +9,7 @@ int	join_philo_threads(t_vars *vars)
 	failed = 0;
 	i = 0;
 	philo = vars->philos;
-	while (i < vars->nb_philo)
+	while (i < failed_nb)
 	{
 		failed = pthread_join(philo->thread, NULL);
 		if (failed)

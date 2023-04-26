@@ -46,3 +46,25 @@ bool	ft_usleep(t_ul sleep_time)
 	}
 	return (true);
 }
+
+bool	set_time_start(t_vars *vars)
+{
+	int		i;
+	t_philo	*philo;
+
+	pthread_mutex_lock(&vars->synchro);
+	if (get_time(vars->start_time) == false)
+		return (pthread_mutex_unlock(&vars->synchro), false);
+	i = 0;
+	philo = vars->philos;
+	while (i < vars->nb_philo)
+	{
+		pthread_mutex_lock(&philo->mutex_last_eat);
+		if (get_time(&philo->last_eat) == false)
+			return (pthread_mutex_unlock(&philo->mutex_last_eat), false);
+		philo = philo->next;
+		++i;
+	}
+	pthread_mutex_unlock(&vars->synchro);
+	return (true);
+}

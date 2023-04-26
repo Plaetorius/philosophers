@@ -9,7 +9,7 @@ void	set_to_zero(t_vars *vars)
 	vars->ttf = -1;
 	vars->philos = NULL;
 	vars->start_time = 0;
-	vars->must_finish = false;
+	vars->end = false;
 }
 
 bool	parsing(int ac, char **av, t_vars *vars)

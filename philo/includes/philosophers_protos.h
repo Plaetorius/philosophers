@@ -23,7 +23,7 @@ bool		get_time(t_ul *val);
 /* MEMORY */
 bool		memory_cleaning(t_vars *vars);
 void		free_philos(t_philo *philo);
-int			join_philo_threads(t_vars *vars);
+int			join_philo_threads(t_vars *vars, int failed_nb);
 bool		clean_forks(t_vars *vars, int fork_failed);
 
 /* THREADS */
