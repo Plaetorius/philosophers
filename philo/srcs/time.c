@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:27:49 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 17:49:32 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:26:25 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool	print_action(t_philo *philo, int action, t_vars *vars)
 	if (vars->end == true)
 		return (pthread_mutex_unlock(&vars->mutex_end), true);
 	pthread_mutex_unlock(&vars->mutex_end);
+	pthread_mutex_lock(&vars->message);
 	if (action == TAKEN_FORK)
 		printf("%lums %d has taken a fork\n", time, philo->nb);
 	else if (action == EATING)
@@ -33,6 +34,7 @@ bool	print_action(t_philo *philo, int action, t_vars *vars)
 		printf("%lums %d is sleeping\n", time, philo->nb);
 	else if (action == THINKING)
 		printf("%lums %d is thinking\n", time, philo->nb);
+	pthread_mutex_unlock(&vars->message);
 	return (true);
 }
 
@@ -71,6 +73,7 @@ bool	set_time_start(t_vars *vars)
 	pthread_mutex_lock(&vars->synchro);
 	if (get_time(&vars->start_time) == false)
 		return (pthread_mutex_unlock(&vars->synchro), false);
+	pthread_mutex_unlock(&vars->synchro);
 	i = 0;
 	philo = vars->philos;
 	while (i < vars->nb_philo)
@@ -82,6 +85,5 @@ bool	set_time_start(t_vars *vars)
 		philo = philo->next;
 		++i;
 	}
-	pthread_mutex_unlock(&vars->synchro);
 	return (true);
 }

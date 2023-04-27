@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:28:07 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 16:47:54 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:28:05 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ int	init_mutexes(t_vars *vars)
 	ret_value = pthread_mutex_init(&vars->mutex_start_time, NULL);
 	if (ret_value)
 		return (printf("Mut STT failed code %d\n", ret_value), ret_value);
+	ret_value = pthread_mutex_init(&vars->message, NULL);
+	if (ret_value)
+		return (printf("Mut Mess failed code %d\n", ret_value), ret_value);
 	return (init_mutexes_philo(vars));
 }
 
@@ -92,5 +95,8 @@ int	destroy_mutexes(t_vars *vars)
 	ret_value = pthread_mutex_destroy(&vars->mutex_start_time);
 	if (ret_value)
 		return (printf("Mut Dest STT Fail code %d\n", ret_value), ret_value);
+	ret_value = pthread_mutex_destroy(&vars->message);
+	if (ret_value)
+		return (printf("Mut Dest Mess Fail code %d\n", ret_value), ret_value);
 	return (destroy_mutexes_philos(vars));
 }
