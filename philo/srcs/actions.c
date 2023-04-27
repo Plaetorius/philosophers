@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/27 16:28:28 by tgernez           #+#    #+#             */
+/*   Updated: 2023/04/27 16:28:28 by tgernez          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 void	eat(t_philo *philo, t_vars *vars)
@@ -28,11 +40,6 @@ bool	take_forks(t_philo *philo, t_vars *vars)
 {
 	pthread_mutex_lock(&philo->fork);
 	print_action(philo, TAKEN_FORK, vars);
-	// if (vars->nb_philo == 1)
-	// {
-	// 	pthread_mutex_unlock(&philo->fork);
-	// 	return (false);
-	// }
 	pthread_mutex_lock(&philo->next->fork);
 	print_action(philo, TAKEN_FORK, vars);
 	return (true);

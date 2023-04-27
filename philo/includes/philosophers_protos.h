@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers_protos.h                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/27 16:28:43 by tgernez           #+#    #+#             */
+/*   Updated: 2023/04/27 16:28:44 by tgernez          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILOSOPHERS_PROTOS_H
 # define PHILOSOPHERS_PROTOS_H
 # include "philosophers_structs.h"
