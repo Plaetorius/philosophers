@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:28:41 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 16:28:41 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/27 16:46:38 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_vars
 	pthread_mutex_t		mutex_ate_enough;
 	pthread_mutex_t		synchro;
 	int					synched;
+	pthread_mutex_t		mutex_start_time;
 }						t_vars;
 
 /*

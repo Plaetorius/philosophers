@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:27:53 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 16:27:53 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:53:07 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sole_philo(t_philo *philo, t_vars *vars)
 			break ;
 		ft_usleep(200);
 	}
-	printf("%lu %d died\n", (time - vars->start_time) / 1000, philo->nb);
+	printf("%lums %d died\n", (time - vars->start_time) / 1000, philo->nb);
 	vars->end = true;
 }
 
@@ -63,8 +63,6 @@ void	*simulation(void *arg)
 		ft_usleep(vars->tts);
 		print_action(philo, THINKING, vars);
 	}
-	pthread_mutex_unlock(&philo->next->fork);
-	pthread_mutex_unlock(&philo->fork);
 	return (NULL);
 }
 
@@ -83,7 +81,7 @@ void	monitor(t_philo *philo, t_vars *vars)
 			pthread_mutex_lock(&vars->mutex_end);
 			vars->end = true;
 			pthread_mutex_unlock(&vars->mutex_end);
-			printf("%lu %d died\n", (time - vars->start_time) / 1000,
+			printf("%lums %d died\n", (time - vars->start_time) / 1000,
 				philo->nb);
 			break ;
 		}

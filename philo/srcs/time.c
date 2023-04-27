@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:27:49 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 16:27:49 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:49:32 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,21 @@ bool	print_action(t_philo *philo, int action, t_vars *vars)
 
 	if (get_time(&time) == false)
 		return (false);
+	pthread_mutex_lock(&vars->mutex_start_time);
 	time = (time - vars->start_time) / 1000;
+	pthread_mutex_unlock(&vars->mutex_start_time);
+	pthread_mutex_lock(&vars->mutex_end);
 	if (vars->end == true)
-	{
-		return (true);
-	}
+		return (pthread_mutex_unlock(&vars->mutex_end), true);
+	pthread_mutex_unlock(&vars->mutex_end);
 	if (action == TAKEN_FORK)
-		printf("%lu %d has taken a fork\n", time, philo->nb);
+		printf("%lums %d has taken a fork\n", time, philo->nb);
 	else if (action == EATING)
-		printf("%lu %d is eating\n", time, philo->nb);
+		printf("%lums %d is eating\n", time, philo->nb);
 	else if (action == SLEEPING)
-		printf("%lu %d is sleeping\n", time, philo->nb);
+		printf("%lums %d is sleeping\n", time, philo->nb);
 	else if (action == THINKING)
-		printf("%lu %d is thinking\n", time, philo->nb);
-	else if (action == DIED)
-	{
-		printf("%lu %d died\n", time, philo->nb);
-		return (true);
-	}
+		printf("%lums %d is thinking\n", time, philo->nb);
 	return (true);
 }
 
