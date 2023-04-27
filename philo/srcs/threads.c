@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:27:53 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 17:53:07 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:47:58 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ void	monitor(t_philo *philo, t_vars *vars)
 			pthread_mutex_lock(&vars->mutex_end);
 			vars->end = true;
 			pthread_mutex_unlock(&vars->mutex_end);
+			pthread_mutex_lock(&vars->message);
 			printf("%lums %d died\n", (time - vars->start_time) / 1000,
 				philo->nb);
+			pthread_mutex_unlock(&vars->message);
 			break ;
 		}
 		pthread_mutex_unlock(&philo->mutex_last_eat);

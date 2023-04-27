@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:28:28 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 17:24:06 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:48:14 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	eat(t_philo *philo, t_vars *vars)
 	ft_usleep(vars->tte);
 	pthread_mutex_unlock(&philo->next->fork);
 	pthread_mutex_unlock(&philo->fork);
-
 }
 
 /*

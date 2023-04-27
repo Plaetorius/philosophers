@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:28:43 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 16:28:44 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:48:32 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,11 @@ void		monitor(t_philo *philo, t_vars *vars);
 bool		must_simul_end(t_vars *vars);
 void		sole_philo(t_philo *philo, t_vars *vars);
 
-
 /* Actions */
 void		eat(t_philo *philo, t_vars *vars);
 bool		take_forks(t_philo *philo, t_vars *vars);
 
 /* Synchro */
-void	thread_synching(t_vars *vars);
+void		thread_synching(t_vars *vars);
 
 #endif
