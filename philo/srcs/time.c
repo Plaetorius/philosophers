@@ -7,6 +7,10 @@ bool	print_action(t_philo *philo, int action, t_vars *vars)
 	if (get_time(&time) == false)
 		return (false);
 	time = (time - vars->start_time) / 1000;
+	if (vars->end == true)
+	{
+		return (true);
+	}
 	if (action == TAKEN_FORK)
 		printf("%lu %d has taken a fork\n", time, philo->nb);
 	else if (action == EATING)
@@ -16,7 +20,10 @@ bool	print_action(t_philo *philo, int action, t_vars *vars)
 	else if (action == THINKING)
 		printf("%lu %d is thinking\n", time, philo->nb);
 	else if (action == DIED)
+	{
 		printf("%lu %d died\n", time, philo->nb);
+		return (true);
+	}
 	return (true);
 }
 
@@ -53,7 +60,7 @@ bool	set_time_start(t_vars *vars)
 	t_philo	*philo;
 
 	pthread_mutex_lock(&vars->synchro);
-	if (get_time(vars->start_time) == false)
+	if (get_time(&vars->start_time) == false)
 		return (pthread_mutex_unlock(&vars->synchro), false);
 	i = 0;
 	philo = vars->philos;
@@ -62,6 +69,7 @@ bool	set_time_start(t_vars *vars)
 		pthread_mutex_lock(&philo->mutex_last_eat);
 		if (get_time(&philo->last_eat) == false)
 			return (pthread_mutex_unlock(&philo->mutex_last_eat), false);
+		pthread_mutex_unlock(&philo->mutex_last_eat);
 		philo = philo->next;
 		++i;
 	}

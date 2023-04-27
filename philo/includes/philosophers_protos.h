@@ -12,6 +12,10 @@ bool		parsing(int ac, char **av, t_vars *vars);
 /* INIT */
 bool		init(t_vars *vars);
 
+/* MUTEXES */
+int			init_mutexes(t_vars *vars);
+int			destroy_mutexes(t_vars *vars);
+
 /* ATOI DEF */
 bool		atoi_def(const char *str, int *val);
 
@@ -19,6 +23,7 @@ bool		atoi_def(const char *str, int *val);
 bool		print_action(t_philo *philo, int action, t_vars *vars);
 bool		ft_usleep(t_ul sleep_time);
 bool		get_time(t_ul *val);
+bool		set_time_start(t_vars *vars);
 
 /* MEMORY */
 bool		memory_cleaning(t_vars *vars);
@@ -28,8 +33,15 @@ int			join_philo_threads(t_vars *vars, int failed_nb);
 /* THREADS */
 void		*simulation(void *arg);
 void		monitor(t_philo *philo, t_vars *vars);
+bool		must_simul_end(t_vars *vars);
+void		sole_philo(t_philo *philo, t_vars *vars);
+
 
 /* Actions */
 void		eat(t_philo *philo, t_vars *vars);
-bool		take_forks(t_philo *philo, t_philo *n_philo, t_vars *vars);
+bool		take_forks(t_philo *philo, t_vars *vars);
+
+/* Synchro */
+void	thread_synching(t_vars *vars);
+
 #endif

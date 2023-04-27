@@ -6,7 +6,7 @@
 #    By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 12:46:27 by tgernez           #+#    #+#              #
-#    Updated: 2023/04/26 15:33:33 by tgernez          ###   ########.fr        #
+#    Updated: 2023/04/27 12:26:21 by tgernez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,10 @@ SRCS 			=	$(addsuffix ${FTSRCS},	\
 					parsing		\
 					cleaning	\
 					init		\
+					mutexes		\
+					actions		\
+					threads		\
+					synchro		\
 					))
 INCLUDES		= -Iincludes
 CC				= cc

@@ -11,6 +11,7 @@ void	set_to_zero(t_vars *vars)
 	vars->start_time = 0;
 	vars->end = false;
 	vars->ate_enough = 0;
+	vars->synched = 0;
 }
 
 bool	parsing(int ac, char **av, t_vars *vars)

@@ -20,7 +20,6 @@ typedef struct s_philo
 {
 	pthread_t			thread;
 	pthread_mutex_t		fork;
-	pthread_mutex_t		mutex_forks;
 	int					nb;
 	t_ul				last_eat;
 	pthread_mutex_t		mutex_last_eat;

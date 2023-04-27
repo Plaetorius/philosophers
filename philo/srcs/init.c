@@ -62,41 +62,22 @@ static bool	init_philo_threads(t_vars *vars)
 	return (true);
 }
 
-static int	init_mutexes(t_vars *vars)
-{
-	int		i;
-	int		ret_value;
-	t_philo	*philo;
-
-	ret_value = false;
-	ret_value |= pthread_mutex_init(&vars->message, NULL);
-	ret_value |= pthread_mutex_init(&vars->synchro, NULL);
-	ret_value |= pthread_mutex_init(&vars->mutex_end, NULL);
-	ret_value |= pthread_mutex_init(&vars->mutex_ate_enough, NULL);
-	i = 0;
-	philo = vars->philos;
-	while (i < vars->nb_philo)
-	{
-		ret_value |= pthread_mutex_init(&philo->mutex_last_eat, NULL);
-		ret_value |= pthread_mutex_init(&philo->fork, NULL);
-		ret_value |= pthread_mutex_init(&philo->mutex_forks, NULL);
-		philo = philo->next;
-		++i;
-	}
-	return (ret_value);
-}
-
 bool	init(t_vars	*vars)
 {
-	if (init_philos(vars))
+	if (init_philos(vars) == false)
 		return (free_philos(vars->philos), false);
-	if (init_mutexes(vars))
-		return (free_mutexes(vars), free_philos(vars), false);
-	if (init_philo_threads(vars))
-		return (free_mutexes(vars), free_philos(vars), false);
-	if (set_time_start(vars))
-		return (join_philo_threads(vars, vars->nb_philo),
-			free_mutexes(vars), free_philos(vars), false);
-	monitor(vars->philos, vars);
+	if (init_mutexes(vars) == false)
+		return (destroy_mutexes(vars), free_philos(vars->philos), false);
+	if (vars->nb_philo == 1)
+		sole_philo(vars->philos, vars);
+	else
+	{
+		if (init_philo_threads(vars) == false)
+			return (destroy_mutexes(vars), free_philos(vars->philos), false);
+		if (set_time_start(vars) == false)
+			return (join_philo_threads(vars, vars->nb_philo),
+				destroy_mutexes(vars), free_philos(vars->philos), false);
+		monitor(vars->philos, vars);
+	}
 	return (true);
 }
