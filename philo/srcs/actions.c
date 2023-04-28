@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:28:28 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 18:48:14 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/28 13:42:04 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ void	eat(t_philo *philo, t_vars *vars)
 */
 bool	take_forks(t_philo *philo, t_vars *vars)
 {
-	if (philo->nb % 2 == 0)
+	if (philo->nb % 2)
 	{
-		pthread_mutex_lock(&philo->fork);
-		print_action(philo, TAKEN_FORK, vars);
 		pthread_mutex_lock(&philo->next->fork);
+		print_action(philo, TAKEN_FORK, vars);
+		pthread_mutex_lock(&philo->fork);
 		print_action(philo, TAKEN_FORK, vars);
 	}
 	else
 	{
-		pthread_mutex_lock(&philo->next->fork);
-		print_action(philo, TAKEN_FORK, vars);
 		pthread_mutex_lock(&philo->fork);
+		print_action(philo, TAKEN_FORK, vars);
+		pthread_mutex_lock(&philo->next->fork);
 		print_action(philo, TAKEN_FORK, vars);
 	}
 	return (true);
