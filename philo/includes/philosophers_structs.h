@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:28:41 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 16:46:38 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/29 12:08:33 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_philo
 	int					meal_number;
 	bool				is_eating;
 	enum e_fork_state	fork_state;
+	pthread_mutex_t		mutex_forks;
 	struct s_philo		*next;
 	struct s_philo		*prev;
 	t_vars				*vars;

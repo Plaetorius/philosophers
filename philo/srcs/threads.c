@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:27:53 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 19:09:18 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/29 12:19:02 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sole_philo(t_philo *philo, t_vars *vars)
 			break ;
 		ft_usleep(200);
 	}
-	printf("%lums %d died\n", (time - vars->start_time) / 1000, philo->nb);
+	printf("%lu %d died\n", (time - vars->start_time) / 1000, philo->nb);
 	vars->end = true;
 }
 
@@ -56,13 +56,19 @@ void	*simulation(void *arg)
 	thread_synching(philo->vars);
 	if (philo->nb % 2 == 0)
 		ft_usleep(10000);
-	while (!must_simul_end(vars) && take_forks(philo, vars))
+	while (!must_simul_end(vars))
 	{
-		eat(philo, vars);
-		print_action(philo, SLEEPING, vars);
-		ft_usleep(vars->tts);
-		print_action(philo, THINKING, vars);
+		if (take_forks(philo, vars))
+		{
+			eat(philo, vars);
+			print_action(philo, SLEEPING, vars);
+			ft_usleep(vars->tts);
+			print_action(philo, THINKING, vars);
+		}
+		else
+			ft_usleep(200);
 	}
+
 	return (NULL);
 }
 
@@ -82,7 +88,7 @@ void	monitor(t_philo *philo, t_vars *vars)
 			vars->end = true;
 			pthread_mutex_unlock(&vars->mutex_end);
 			pthread_mutex_lock(&vars->message);
-			printf("%lums %d died\n", (time - vars->start_time) / 1000,
+			printf("%lu %d died\n", (time - vars->start_time) / 1000,
 				philo->nb);
 			pthread_mutex_unlock(&vars->message);
 			break ;

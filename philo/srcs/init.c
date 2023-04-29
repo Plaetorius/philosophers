@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:28:09 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 16:28:10 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/29 12:10:51 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static t_philo	*new_philo(int nb, t_vars *vars)
 	philo->nb = nb;
 	philo->meal_number = 0;
 	philo->last_eat = 0;
+	philo->fork_state = BOTH_FORKS;
 	philo->vars = vars;
 	philo->next = philo;
 	philo->prev = philo;

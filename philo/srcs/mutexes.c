@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:28:07 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 18:28:05 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/29 12:10:17 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ static int	init_mutexes_philo(t_vars *vars)
 	i = 0;
 	while (i < vars->nb_philo)
 	{
+		ret_value = pthread_mutex_init(&philo->mutex_forks, NULL);
+		if (ret_value)
+			return (printf("Mutex Forks failed code %d\n", ret_value));
 		ret_value = pthread_mutex_init(&philo->mutex_last_eat, NULL);
 		if (ret_value)
 			return (printf("Mutex LE failed code %d\n", ret_value));
@@ -66,6 +69,9 @@ static int	destroy_mutexes_philos(t_vars *vars)
 	i = 0;
 	while (i < vars->nb_philo)
 	{
+		ret_value = pthread_mutex_destroy(&philo->mutex_forks);
+		if (ret_value)
+			return (printf("Mut Dest Fs Fail code %d\n", ret_value), ret_value);
 		ret_value = pthread_mutex_destroy(&philo->mutex_last_eat);
 		if (ret_value)
 			return (printf("Mut Dest LE Fail code %d\n", ret_value), ret_value);

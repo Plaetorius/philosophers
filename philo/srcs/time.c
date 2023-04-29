@@ -6,7 +6,7 @@
 /*   By: tgernez <tgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:27:49 by tgernez           #+#    #+#             */
-/*   Updated: 2023/04/27 18:26:25 by tgernez          ###   ########.fr       */
+/*   Updated: 2023/04/28 16:48:25 by tgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ bool	print_action(t_philo *philo, int action, t_vars *vars)
 	pthread_mutex_unlock(&vars->mutex_end);
 	pthread_mutex_lock(&vars->message);
 	if (action == TAKEN_FORK)
-		printf("%lums %d has taken a fork\n", time, philo->nb);
+		printf("%lu %d has taken a fork\n", time, philo->nb);
 	else if (action == EATING)
-		printf("%lums %d is eating\n", time, philo->nb);
+		printf("%lu %d is eating\n", time, philo->nb);
 	else if (action == SLEEPING)
-		printf("%lums %d is sleeping\n", time, philo->nb);
+		printf("%lu %d is sleeping\n", time, philo->nb);
 	else if (action == THINKING)
-		printf("%lums %d is thinking\n", time, philo->nb);
+		printf("%lu %d is thinking\n", time, philo->nb);
 	pthread_mutex_unlock(&vars->message);
 	return (true);
 }
